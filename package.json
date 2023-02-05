@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "a-goog-trans",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -30,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/Sia-WRWD/AGoogTrans/issues"
   },
-  "homepage": "https://github.com/Sia-WRWD/AGoogTrans#readme",
+  "homepage": "https://github.com/Sia-WRWD/AGoogTrans/blob/final/projects/a-goog-trans/README.md",
   "dependencies": {
     "@angular/animations": "^15.1.0",
     "@angular/common": "^15.1.0",
