@@ -1,5 +1,5 @@
 {
-  "name": "a-goog-trans",
+  "name": "test",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,29 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "private": true,
+    "repository": {
+    "type": "git",
+    "url": "https://github.com/Sia-WRWD/AGoogTrans.git"
+  },
+  "keywords": [
+    "translate",
+    "translator",
+    "google",
+    "translate",
+    "api",
+    "free",
+    "language"
+  ],
+  "author": {
+    "name": "Sia Chee Zhen",
+    "email": "cheezhensia24@gmail.com",
+    "url": "http://heysia.dev"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sia-WRWD/AGoogTrans/issues"
+  },
+  "homepage": "https://github.com/Sia-WRWD/AGoogTrans#readme",
   "dependencies": {
     "@angular/animations": "^15.1.0",
     "@angular/common": "^15.1.0",
@@ -23,7 +45,8 @@
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
-    "@angular/cli": "~15.1.4",
+    "@angular-devkit/build-angular": "^15.1.1",
+    "@angular/cli": "~15.1.1",
     "@angular/compiler-cli": "^15.1.0",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
@@ -32,6 +55,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "typescript": "~4.9.4"
+    "ng-packagr": "^15.1.0",
+    "typescript": "^4.8.2"
   }
 }

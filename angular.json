@@ -3,5 +3,41 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "a-goog-trans": {
+      "projectType": "library",
+      "root": "projects/a-goog-trans",
+      "sourceRoot": "projects/a-goog-trans/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/a-goog-trans/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/a-goog-trans/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/a-goog-trans/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/a-goog-trans/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
   }
 }
