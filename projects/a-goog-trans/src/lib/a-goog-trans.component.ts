@@ -42,15 +42,15 @@ import { AGoogTransService } from './a-goog-trans.service';
       margin: auto;
     }
 
-    :host ::ng-deep .goog-te-gadget img {
+    ::ng-deep .goog-te-gadget img {
       display: none !important;
     }
 
-    :host ::ng-deep .goog-te-gadget-simple .goog-te-menu-value span {
+    ::ng-deep .goog-te-gadget-simple .goog-te-menu-value span {
       border: 0 !important;
     }
 
-    :host ::ng-deep .goog-te-gadget-simple {
+    ::ng-deep .goog-te-gadget-simple {
       border: 0 !important;
     }
 
