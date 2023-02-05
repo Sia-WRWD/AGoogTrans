@@ -20,7 +20,7 @@ import { AGoogTransService } from './a-goog-trans.service';
       display: flex;
       flex-direction: row;
       background: #ffffff;
-      padding: 10px 10px 13px 10px;
+      padding: 10px;
       border-radius: 25px;
       align-items: center;
       box-shadow: 0 3px 12px rgb(0 0 0 / 15%);
@@ -31,6 +31,7 @@ import { AGoogTransService } from './a-goog-trans.service';
 
     .google-translator-container .google-translator-icon {
       margin-right: 15px;
+      height: 30px;
     }
 
     .google-translator-icon img {
