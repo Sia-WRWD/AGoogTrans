@@ -20,12 +20,11 @@ import { AGoogTransService } from './a-goog-trans.service';
       display: flex;
       flex-direction: row;
       background: #ffffff;
-      padding: 10px 11px;
+      padding: 10px 10px 13px 10px;
       border-radius: 25px;
       align-items: center;
       box-shadow: 0 3px 12px rgb(0 0 0 / 15%);
-      width: 29px;
-      height: 25px;
+      width: 50px;
       overflow: hidden;
       transition: all 0.3s;
     }
@@ -46,7 +45,7 @@ import { AGoogTransService } from './a-goog-trans.service';
       display: none !important;
     }
 
-    ::ng-deep .goog-te-gadget-simple .goog-te-menu-value span {
+    ::ng-deep .goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed span {
       border: 0 !important;
     }
 
@@ -54,11 +53,17 @@ import { AGoogTransService } from './a-goog-trans.service';
       border: 0 !important;
     }
 
-    ::ng-deep .goog-te-banner-frame.skiptranslate {
+    ::ng-deep .VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate {
       display: none !important;
     }
   `]
 })
+
+/*CSS Class Name Change
+1. .VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate (new) .goog-te-banner-frame.skiptranslate (prev)
+2. .VIpgJd-ZVi9od-xl07Ob-lTBxed (new) .goog-te-menu-value (prev)
+*/
+
 export class AGoogTransComponent implements OnInit {
   @Input() languagesToInclude: string;
 
@@ -74,7 +79,7 @@ export class AGoogTransComponent implements OnInit {
   }
 
   setFirstLanguage() {
-      const link2 = document.querySelector('.goog-te-menu-value span:first-child');
+      const link2 = document.querySelector('.VIpgJd-ZVi9od-xl07Ob-lTBxed span:first-child');
       this.previousLanguage = link2.textContent;
 
       this.observeLanguageChange();
@@ -82,7 +87,7 @@ export class AGoogTransComponent implements OnInit {
 
   observeLanguageChange() {
       setInterval(() => {
-          const link2 = document.querySelector('.goog-te-menu-value span:first-child');
+          const link2 = document.querySelector('.VIpgJd-ZVi9od-xl07Ob-lTBxed span:first-child');
 
           if (this.previousLanguage != link2.textContent) {
               this.previousLanguage = link2.textContent;
@@ -98,7 +103,7 @@ export class AGoogTransComponent implements OnInit {
           this.googleTranslatorVisibility = true;
       } else {
           var gtc = document.getElementById('gtc');
-          gtc.style.width = "29px";
+          gtc.style.width = "50px";
           this.googleTranslatorVisibility = false;
       }
   }

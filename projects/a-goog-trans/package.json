@@ -1,6 +1,29 @@
 {
   "name": "a-goog-trans",
-  "version": "0.0.1",
+  "version": "0.0.5",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sia-WRWD/AGoogTrans.git"
+  },
+  "keywords": [
+    "translate",
+    "translator",
+    "google",
+    "translate",
+    "api",
+    "free",
+    "language"
+  ],
+  "author": {
+    "name": "Sia Chee Zhen",
+    "email": "cheezhensia24@gmail.com",
+    "url": "http://heysia.dev"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sia-WRWD/AGoogTrans/issues"
+  },
+  "homepage": "https://github.com/Sia-WRWD/AGoogTrans/blob/final/projects/a-goog-trans/README.md",
   "peerDependencies": {
     "@angular/common": "^15.1.0",
     "@angular/core": "^15.1.0"
