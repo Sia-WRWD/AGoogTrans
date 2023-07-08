@@ -50,7 +50,7 @@ npm install a-goog-trans
 </ol>
 
 ## License
-MIT © <a href="https://www.heysia.dev" target="_blank">Sia Chee Zhen</a>
+MIT © <a href="https://www.heysia.dev" target="_blank">SiaWRWD</a>
 
 <br/>
 
