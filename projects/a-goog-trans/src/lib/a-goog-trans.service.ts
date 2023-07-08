@@ -9,8 +9,9 @@ declare var google: any;
 export class AGoogTransService {
     constructor() {}
 
-    initTranslate(languagesToInclude: string) {
+    initTranslate(languagesToInclude: string, defaultLanguage: string) {
         new google.translate.TranslateElement({
+            pageLanguage: defaultLanguage,
             includedLanguages: languagesToInclude, //Insert Language Type (Other Codes refer to: https://developer.google.com/admin-sdk/directory/v1/languages)
             layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
             autoDisplay: false

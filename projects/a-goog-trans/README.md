@@ -47,6 +47,7 @@ npm install a-goog-trans
   <li> https://www.w3schools.com/howto/howto_google_translate.asp </li>
   <li> https://stackoverflow.com/questions/27935450/detect-google-website-translator-change-of-language </li>
   <li> https://stackoverflow.com/questions/6633127/can-you-style-the-google-translate-plugin </li>
+  <li> https://stackoverflow.com/questions/57042407/how-to-reference-images-in-node-module-package </li>
 </ol>
 
 ## License

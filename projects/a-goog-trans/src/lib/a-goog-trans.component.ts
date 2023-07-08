@@ -67,6 +67,7 @@ import { AGoogTransService } from './a-goog-trans.service';
 
 export class AGoogTransComponent implements OnInit {
   @Input() languagesToInclude: string;
+  @Input() defaultLanguage: string;
 
   googleTranslatorVisibility: boolean = false;
   previousLanguage: string = "";
@@ -75,7 +76,7 @@ export class AGoogTransComponent implements OnInit {
   constructor(private googleTranslateService: AGoogTransService) { }
 
   ngOnInit(): void {
-      this.googleTranslateService.initTranslate(this.languagesToInclude);
+      this.googleTranslateService.initTranslate(this.languagesToInclude, this.defaultLanguage);
       this.setFirstLanguage();
   }
 
