@@ -29,7 +29,7 @@ import { CookieService } from 'ngx-cookie-service';
         position: fixed;
         bottom: 155px;
         right: 23px;
-        height: 30px;
+        height: 50px;
         z-index: 2;
         display: flex;
         flex-direction: row;
@@ -38,7 +38,7 @@ import { CookieService } from 'ngx-cookie-service';
         border-radius: 25px;
         align-items: center;
         box-shadow: 0 3px 12px rgb(0 0 0 / 15%);
-        width: 35px;
+        width: 50px;
         transition: all 0.3s;
         column-gap: 10px;
         justify-content: center;
@@ -50,10 +50,8 @@ import { CookieService } from 'ngx-cookie-service';
         height: 100%;
     }
 
-    //Dropdown Menu Code
     .google-language-select {
         width: 100%;
-        overflow-y: visible;
     }
 
     .dropdown {
@@ -198,7 +196,7 @@ export class AGoogTransComponent implements OnInit {
       gtc!.style.padding = "15px";
       this.googleTranslatorVisibility = true;
     } else {
-      gtc!.style.width = "35px";
+      gtc!.style.width = "50px";
       gtc!.style.padding = "10px";
       this.googleTranslatorVisibility = false;
     }
