@@ -129,6 +129,7 @@ export class AGoogTransComponent implements OnInit {
 
   @Input() languagesToInclude!: string;
   @Input() defaultLanguage!: string;
+  @Input() domainName: string;
 
   googleTranslatorVisibility: boolean = false;
   previousLanguage: any;
@@ -136,7 +137,7 @@ export class AGoogTransComponent implements OnInit {
 
   availableLangOptions: any = [
     { label: "English", value: "en" },
-    { label: "Filipino", value: "fil" },
+    { label: "Filipino", value: "tl" },
     { label: "Hindi", value: "hi" },
     { label: "Indonesian", value: "id" },
     { label: "Japanese", value: "ja" },
@@ -157,7 +158,11 @@ export class AGoogTransComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.languagesToInclude == null) {
-      this.languagesToInclude = "en,fil,id,ja,ko,ms,zh-CN,hi,th,zh-TW,vi";
+      this.languagesToInclude = "en,tl,id,ja,ko,ms,zh-CN,hi,th,zh-TW,vi";
+    }
+
+    if (this.domainName == null) {
+      this.domainName = "localhost";
     }
 
     this.googleTranslateService.googleTranslateElementInit(this.languagesToInclude, this.defaultLanguage);
@@ -171,7 +176,9 @@ export class AGoogTransComponent implements OnInit {
 
   executeTranslation(languageCode: string) {
     const formattedLanguageCode = "/en/" + languageCode;
-    this.cookieService.set('googtrans', formattedLanguageCode, 1, '/', 'localhost', false, "Strict");
+    const expires = new Date();
+    expires.setDate(expires.getDate() + 1);
+    document.cookie = `googtrans=${formattedLanguageCode}; expires=${expires.toUTCString()}; path=/`;
     location.reload();
   }
 
@@ -180,7 +187,7 @@ export class AGoogTransComponent implements OnInit {
 
     if (!languageValue) {
       this.changePic("default");
-      this.selectedLanguage = "English";
+      this.selectedLanguage = this.availableLangOptions.find((language: any) => language.value === 'en');
     } else {
       const langCode = languageValue.split('/').pop();
       this.selectedLanguage = this.availableLangOptions.find((language: any) => language.value === langCode);
