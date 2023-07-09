@@ -76,46 +76,51 @@ export class AGoogTransComponent implements OnInit {
   constructor(private googleTranslateService: AGoogTransService) { }
 
   ngOnInit(): void {
-      this.googleTranslateService.initTranslate(this.languagesToInclude, this.defaultLanguage);
+    this.googleTranslateService.googleTranslateElementInit(this.languagesToInclude, this.defaultLanguage);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
       this.setFirstLanguage();
+    }, 100); // Adjust the delay as needed
   }
 
   setFirstLanguage() {
-      const link2 = document.querySelector('.VIpgJd-ZVi9od-xl07Ob-lTBxed span:first-child');
-      this.previousLanguage = link2.textContent;
+    const link2 = document.querySelector('.VIpgJd-ZVi9od-xl07Ob-lTBxed span:first-child');
+    this.previousLanguage = link2.textContent;
 
-      this.observeLanguageChange();
+    this.observeLanguageChange();
   }
 
   observeLanguageChange() {
-      setInterval(() => {
-          const link2 = document.querySelector('.VIpgJd-ZVi9od-xl07Ob-lTBxed span:first-child');
+    setInterval(() => {
+      const link2 = document.querySelector('.VIpgJd-ZVi9od-xl07Ob-lTBxed span:first-child');
 
-          if (this.previousLanguage != link2.textContent) {
-              this.previousLanguage = link2.textContent;
-              this.changePic(this.previousLanguage);
-          }
-      }, 1000);
+      if (this.previousLanguage != link2.textContent) {
+        this.previousLanguage = link2.textContent;
+        this.changePic(this.previousLanguage);
+      }
+    }, 1000);
   }
 
   showHideTranslator() {
-      if (this.googleTranslatorVisibility == false) {
-          var gtc = document.getElementById('gtc');
-          gtc.style.width = "215px";
-          this.googleTranslatorVisibility = true;
-      } else {
-          var gtc = document.getElementById('gtc');
-          gtc.style.width = "50px";
-          this.googleTranslatorVisibility = false;
-      }
+    if (this.googleTranslatorVisibility == false) {
+      var gtc = document.getElementById('gtc');
+      gtc.style.width = "215px";
+      this.googleTranslatorVisibility = true;
+    } else {
+      var gtc = document.getElementById('gtc');
+      gtc.style.width = "50px";
+      this.googleTranslatorVisibility = false;
+    }
   }
 
   changePic(language: string) {
-      var imageToChange = document.getElementById("flag-icon") as HTMLImageElement | null;
-      var formattedLanguage = language.replace(/ /g, "-").toLowerCase();
+    var imageToChange = document.getElementById("flag-icon") as HTMLImageElement | null;
+    var formattedLanguage = language.replace(/ /g, "-").toLowerCase();
 
-      if (imageToChange != null) {
-          imageToChange.src = this.flagAssetsPath + formattedLanguage + "-flag.png";
-      }
+    if (imageToChange != null) {
+      imageToChange.src = this.flagAssetsPath + formattedLanguage + "-flag.png";
+    }
   }
 }
