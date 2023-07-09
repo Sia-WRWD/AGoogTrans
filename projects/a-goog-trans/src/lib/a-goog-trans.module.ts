@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AGoogTransComponent } from './a-goog-trans.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -8,6 +9,7 @@ import { AGoogTransComponent } from './a-goog-trans.component';
     AGoogTransComponent
   ],
   imports: [
+    CommonModule
   ],
   exports: [
     AGoogTransComponent
