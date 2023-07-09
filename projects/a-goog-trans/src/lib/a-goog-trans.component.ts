@@ -1,61 +1,123 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AGoogTransService } from './a-goog-trans.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'a-goog-trans',
   template: `
     <div class="google-translator-container" id="gtc">
       <div class="google-translator-icon" (click)="showHideTranslator()">
-          <img src="../assets/flags/select-language-flag.png" alt="gti.png" id="flag-icon" />
+        <img src="../assets/flags/default-flag.png" alt="gti.png" id="flag-icon" />
       </div>
-      <div id="google_translate_element" style="display: block;"></div>
+      <ng-container *ngIf="googleTranslatorVisibility == true">
+        <div class="google-language-select notranslate" id="gts">
+          <div class="dropdown">
+            <button (click)="toggleDropdown()" class="dropbtn">{{ selectedLanguage.label }}</button>
+            <div *ngIf="isOpen" class="dropdown-content" style="display: block;">
+              <ng-container *ngFor="let option of availableLangOptions">
+                <a (click)="executeTranslation(option.value)">{{option.label}}</a>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div id="google_translate_element" style="display: none;"></div>
     </div>
   `,
   styles: [`
     .google-translator-container {
-      position: fixed;
-      bottom: 155px;
-      right: 23px;
-      z-index: 2;
-      display: flex;
-      flex-direction: row;
-      background: #ffffff;
-      padding: 10px;
-      border-radius: 25px;
-      align-items: center;
-      box-shadow: 0 3px 12px rgb(0 0 0 / 15%);
-      width: 50px;
-      overflow: hidden;
-      transition: all 0.3s;
-    }
-
-    .google-translator-container .google-translator-icon {
-      margin-right: 15px;
-      height: 30px;
+        position: fixed;
+        bottom: 155px;
+        right: 23px;
+        height: 30px;
+        z-index: 2;
+        display: flex;
+        flex-direction: row;
+        background: #ffffff;
+        padding: 10px;
+        border-radius: 25px;
+        align-items: center;
+        box-shadow: 0 3px 12px rgb(0 0 0 / 15%);
+        width: 35px;
+        transition: all 0.3s;
+        column-gap: 10px;
+        justify-content: center;
     }
 
     .google-translator-icon img {
-      filter: drop-shadow(1px 2px 2px black)
+        filter: drop-shadow(1px 2px 2px black);
+        width: 100%;
+        height: 100%;
     }
 
+    //Dropdown Menu Code
+    .google-language-select {
+        width: 100%;
+        overflow-y: visible;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .dropbtn {
+        background-color: #4285F4;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        border-radius: 7px;
+        font-weight: 600;
+        text-shadow: 1px 2px 3px black;
+        letter-spacing: 1px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        width: 100%;
+        height: 125px;
+        overflow-y: auto;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    //Other Stuff
     #google_translate_element {
-      margin: auto;
+        margin: auto;
     }
 
     ::ng-deep .goog-te-gadget img {
-      display: none !important;
+        display: none !important;
     }
 
     ::ng-deep .goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed span {
-      border: 0 !important;
+        border: 0 !important;
     }
 
     ::ng-deep .goog-te-gadget-simple {
-      border: 0 !important;
+        border: 0 !important;
     }
 
     ::ng-deep .VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate {
-      display: none !important;
+        display: none !important;
     }
   `]
 })
@@ -66,16 +128,40 @@ import { AGoogTransService } from './a-goog-trans.service';
 */
 
 export class AGoogTransComponent implements OnInit {
-  @Input() languagesToInclude: string;
-  @Input() defaultLanguage: string;
+
+  @Input() languagesToInclude!: string;
+  @Input() defaultLanguage!: string;
 
   googleTranslatorVisibility: boolean = false;
-  previousLanguage: string = "";
+  previousLanguage: any;
   flagAssetsPath: string = "../assets/flags/";
 
-  constructor(private googleTranslateService: AGoogTransService) { }
+  availableLangOptions: any = [
+    { label: "English", value: "en" },
+    { label: "Filipino", value: "fil" },
+    { label: "Hindi", value: "hi" },
+    { label: "Indonesian", value: "id" },
+    { label: "Japanese", value: "ja" },
+    { label: "Korean", value: "ko" },
+    { label: "Malay", value: "ms" },
+    { label: "Chinese (PRC)", value: "zh-CN" },
+    { label: "Thai", value: "th" },
+    { label: "Chinese (TW)", value: "zh-TW" },
+    { label: "Vietnamese", value: "vi" }
+  ];
+  selectedLanguage: any = "";
+  isOpen: boolean = false;
+
+  constructor(
+    private googleTranslateService: AGoogTransService,
+    private cookieService: CookieService
+  ) { }
 
   ngOnInit(): void {
+    if (this.languagesToInclude == null) {
+      this.languagesToInclude = "en,fil,id,ja,ko,ms,zh-CN,hi,th,zh-TW,vi";
+    }
+
     this.googleTranslateService.googleTranslateElementInit(this.languagesToInclude, this.defaultLanguage);
   }
 
@@ -85,42 +171,52 @@ export class AGoogTransComponent implements OnInit {
     }, 100); // Adjust the delay as needed
   }
 
-  setFirstLanguage() {
-    const link2 = document.querySelector('.VIpgJd-ZVi9od-xl07Ob-lTBxed span:first-child');
-    this.previousLanguage = link2.textContent;
-
-    this.observeLanguageChange();
+  executeTranslation(languageCode: string) {
+    const formattedLanguageCode = "/en/" + languageCode;
+    this.cookieService.set('googtrans', formattedLanguageCode, 1, '/', 'localhost', false, "Strict");
+    location.reload();
   }
 
-  observeLanguageChange() {
-    setInterval(() => {
-      const link2 = document.querySelector('.VIpgJd-ZVi9od-xl07Ob-lTBxed span:first-child');
+  setFirstLanguage() {
+    const languageValue = this.cookieService.get('googtrans');
 
-      if (this.previousLanguage != link2.textContent) {
-        this.previousLanguage = link2.textContent;
-        this.changePic(this.previousLanguage);
-      }
-    }, 1000);
+    if (!languageValue) {
+      this.changePic("default");
+      this.selectedLanguage = "English";
+    } else {
+      const langCode = languageValue.split('/').pop();
+      this.selectedLanguage = this.availableLangOptions.find((language: any) => language.value === langCode);
+      this.changePic(langCode!);
+    }
   }
 
   showHideTranslator() {
+    var gtc = document.getElementById('gtc');
+
     if (this.googleTranslatorVisibility == false) {
-      var gtc = document.getElementById('gtc');
-      gtc.style.width = "215px";
+      gtc!.style.width = "250px";
+      gtc!.style.padding = "15px";
       this.googleTranslatorVisibility = true;
     } else {
-      var gtc = document.getElementById('gtc');
-      gtc.style.width = "50px";
+      gtc!.style.width = "35px";
+      gtc!.style.padding = "10px";
       this.googleTranslatorVisibility = false;
     }
   }
 
   changePic(language: string) {
     var imageToChange = document.getElementById("flag-icon") as HTMLImageElement | null;
-    var formattedLanguage = language.replace(/ /g, "-").toLowerCase();
 
     if (imageToChange != null) {
-      imageToChange.src = this.flagAssetsPath + formattedLanguage + "-flag.png";
+      imageToChange.src = this.flagAssetsPath + language + "-flag.png";
     }
+  }
+
+  toggleDropdown() {
+    this.isOpen = !this.isOpen;
+  }
+
+  closeDropdown() {
+    this.isOpen = false;
   }
 }

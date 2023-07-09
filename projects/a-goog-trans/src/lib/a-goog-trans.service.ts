@@ -14,8 +14,7 @@ export class AGoogTransService {
         const googleTranslateScript = document.createElement('script');
         googleTranslateScript.type = 'text/javascript';
         googleTranslateScript.async = true;
-        googleTranslateScript.src =
-          'https://translate.google.com/translate_a/element.js?cb=onGoogleTranslateLoad';
+        googleTranslateScript.src = 'https://translate.google.com/translate_a/element.js?cb=onGoogleTranslateLoad';
         document.body.appendChild(googleTranslateScript);
     
         // Define the callback function
