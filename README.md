@@ -50,7 +50,7 @@ npm install a-goog-trans
 </ol>
 
 ## License
-<a href="MIT.txt">MIT License</a> MIT © <a href="https://www.heysia.dev" target="_blank">Sia-WRWD</a>
+<a href="MIT.txt">MIT ©</a> <a href="https://www.heysia.dev" target="_blank">Sia-WRWD</a>
 
 <br/>
 
