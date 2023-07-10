@@ -15,10 +15,7 @@ An Angular V15 Translate Widget Library made using Google Translate's open-sourc
 </ul>
 
 ## Live Demo
-<video width="100%" height="auto" autoplay loop>
-  <source src="live-demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<img src="live-demo.gif" width="600px" alt="Live Demo">
 
 ## Features 
 <ul>
