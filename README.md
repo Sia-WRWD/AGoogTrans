@@ -15,7 +15,9 @@ An Angular V15 Translate Widget Library made using Google Translate's open-sourc
 </ul>
 
 ## Live Demo
-<img src="live-demo.gif" width="600px" alt="Live Demo">
+<div align="center">
+  <img src="live-demo.gif" width="600px" alt="Live Demo">
+</div>
 
 ## Features 
 <ul>
