@@ -14,7 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
           <div class="dropdown">
             <button (click)="toggleDropdown()" class="dropbtn">{{ selectedLanguage.label }}</button>
             <div *ngIf="isOpen" class="dropdown-content" style="display: block;">
-              <ng-container *ngFor="let option of availableLangOptions">
+              <ng-container *ngFor="let option of userLangOptions">
                 <a (click)="executeTranslation(option.value)">{{option.label}}</a>
               </ng-container>
             </div>
@@ -148,6 +148,7 @@ export class AGoogTransComponent implements OnInit {
     { label: "Chinese (TW)", value: "zh-TW" },
     { label: "Vietnamese", value: "vi" }
   ];
+  userLangOptions: any = [];
   selectedLanguage: any = "";
   isOpen: boolean = false;
 
@@ -159,6 +160,11 @@ export class AGoogTransComponent implements OnInit {
   ngOnInit(): void {
     if (this.languagesToInclude == null) {
       this.languagesToInclude = "en,tl,id,ja,ko,ms,zh-CN,hi,th,zh-TW,vi";
+      this.userLangOptions = this.availableLangOptions;
+    } else {
+      this.userLangOptions = this.availableLangOptions.filter((language: any) =>
+        this.languagesToInclude.includes(language.value)
+      );
     }
 
     if (this.domainName == null) {
