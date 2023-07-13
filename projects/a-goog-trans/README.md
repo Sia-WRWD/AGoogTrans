@@ -1,19 +1,23 @@
 # AGoogTrans
-An Angular Translate Widget Library made using Google Translate's open-source API which is now accessible at <a href="https://www.npmjs.com/package/a-goog-trans" target="_blank">npmjs</a>. 
+An Angular V15 Translate Widget Library made using Google Translate's open-source API that is <b>currently only supporting Angular Version 15</b> which is now accessible at <a href="https://www.npmjs.com/package/a-goog-trans" target="_blank">npmjs</a>. 
 
 ## Table of Contents
 <ul>
   <li><a href="#live-demo">Live Demo</a></li>
   <li><a href="#features">Features</a></li>
   <li><a href="#install">Install</a></li>
-  <li><a href="#usage-important">Usage</a></li>
+  <li><a href="#currently-supported-languages">Currently Supported Languages</a></li>
+  <li><a href="#sample-code">Sample Code</a></li>
+  <li><a href="#options">Options</a></li>
   <li><a href="#create-your-own">Project Configurations</a></li>
   <li><a href="#improvement-checklist">Improvement Checklist</a></li>
   <li><a href="#useful-reference-documentation">Useful Reference Documentation</a></li>
 </ul>
 
 ## Live Demo
-<b>Coming Soon</b>
+<div align="center">
+  <img src="live-demo.gif" alt="Live Demo">
+</div>
 
 ## Features 
 <ul>
@@ -26,15 +30,98 @@ An Angular Translate Widget Library made using Google Translate's open-source AP
 npm install a-goog-trans
 ```
 
-## Usage (IMPORTANT!!!)
-<b>Coming Soon</b>
+## Currently Supported Languages
+| Language          | Language Code |
+| :---:             | :---:         |
+| English           | en            |
+| Filipino          | tl            |
+| Hindi             | hi            |
+| Indonesian        | id            |
+| Japanese          | ja            |
+| Korean            | ko            |
+| Malay             | ms            |
+| Chinese (PRC)     | zh-CN         |
+| Thai              | th            |
+| Chinese (TW)      | zh-TW         |
+| Vietnamese        | vi            |
+
+## Sample Code
+<b>app.module</b>
+```
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AGoogTransModule } from 'a-goog-trans';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AGoogTransModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+<b>app.component.ts</b>
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  languageToInclude: any = "";
+  defaultLanguage: any = "en";
+  domainName: any = "";
+}
+```
+
+<b>app.component.html</b>
+```
+<a-goog-trans [languagesToInclude]="languagesToInclude" [defaultLanguage]="defaultLanguage" [domainName]="domainName"></a-goog-trans>
+```
+
+<b>angular.json (assets for build and testing)</b>
+```
+"assets": [
+  "src/favicon.ico",
+  "src/assets",
+  {
+    "glob": "**/*",
+    "input": "./node_modules/a-goog-trans/src/assets",
+    "output": "/assets/"
+  }
+],
+```
+
+## Options
+| Input Variables    | Default Value                          |
+| :---:              | :---:                                  |
+| languagesToInclude | en,tl,id,ja,ko,ms,zh-CN,hi,th,zh-TW,vi |
+| defaultLanguage    | en                                     |
+| domainName         | localhost                              |
+<ul>
+<li>To customize "languagesToInclude", just add the <a href="#currently-supported-languages">language code</a>, i.e. "en,tl,id" with no spaces. </li>
+<li>To customize "defaultLanguage, just put in a single language code, i.e. "en". </li>
+<li>To customize "domainName", for development, use "localhost" and for deployment or production, use your website's domain name. </li>
+</ul>
 
 ## Improvement Checklist
 | Task | Last Modified | Status |
 | :---:   | :---: | :---: |
-| Add Usage Details | 30/01/2023   | Pending   |
-| Add More Language Flags | 30/01/2023   | Pending   |
-| Angular Versionings | 30/01/2023   | Pending   |
+| Add Usage Details | 10/07/2023   | Completed   |
+| Add More Language Flags | 10/07/2023   | Pending   |
+| Angular Versionings | 30/01/2023   | TBC   |
 
 ## Create Your Own
 <p>
@@ -47,11 +134,10 @@ npm install a-goog-trans
   <li> https://www.w3schools.com/howto/howto_google_translate.asp </li>
   <li> https://stackoverflow.com/questions/27935450/detect-google-website-translator-change-of-language </li>
   <li> https://stackoverflow.com/questions/6633127/can-you-style-the-google-translate-plugin </li>
-  <li> https://stackoverflow.com/questions/57042407/how-to-reference-images-in-node-module-package </li>
 </ol>
 
 ## License
-MIT © <a href="https://www.heysia.dev" target="_blank">Sia Chee Zhen</a>
+<a href="MIT.txt">MIT ©</a> <a href="https://www.heysia.dev" target="_blank">Sia-WRWD</a>
 
 <br/>
 
