@@ -158,7 +158,7 @@ export class AGoogTransComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.languagesToInclude == "") {
+    if (!this.languagesToInclude) {
       this.languagesToInclude = "en,tl,id,ja,ko,ms,zh-CN,hi,th,zh-TW,vi";
       this.userLangOptions = this.availableLangOptions;
     } else {
